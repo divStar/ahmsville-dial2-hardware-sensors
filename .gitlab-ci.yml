@@ -46,7 +46,6 @@ test_build:
 
 sast:
   stage: test
-  <<: *rules_for_merge_requests
 
 include:
   - template: Auto-DevOps.gitlab-ci.yml
