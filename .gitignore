@@ -4,6 +4,9 @@
 # Ignore PlatformIO build directory
 .pio
 
+# Ignore public
+public/
+
 # Ignore CLion artifacts
 .idea
 cmake-build-*

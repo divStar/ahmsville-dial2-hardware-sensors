@@ -1,0 +1,16 @@
+{
+  "name": "mpu6050-custom",
+  "keywords": "mpu6050, sensors, hardware",
+  "description": "Custom MPU6050 library",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Various",
+      "email": "various.authors@example.com"
+    }
+  ],
+  "dependencies": [],
+  "build": {
+    "flags": []
+  }
+}
