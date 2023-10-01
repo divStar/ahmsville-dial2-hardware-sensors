@@ -7,6 +7,11 @@
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 image: python:3.9
 
+# Define rules for merge requests
+.rules_for_merge_requests: &rules_for_merge_requests
+  if: '$CI_MERGE_REQUEST_ID'
+  when: always
+
 cache:
   paths:
     - ~/.cache/pip
@@ -33,6 +38,7 @@ before_script:
 
 test_build:
   stage: build
+  <<: *rules_for_merge_requests
   variables:
     PLATFORMIO_CI_SRC: examples/CompileTest
   script:
@@ -40,6 +46,7 @@ test_build:
 
 sast:
   stage: test
+  <<: *rules_for_merge_requests
 
 include:
   - template: Auto-DevOps.gitlab-ci.yml
