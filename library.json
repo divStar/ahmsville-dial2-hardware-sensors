@@ -1,0 +1,34 @@
+{
+  "name": "Dial2HardwareSensors",
+  "keywords": "dial2, sensors, hardware, interfaces",
+  "description": "A simple library containing hardware implementations of sensor adapters for the AhmsVille Dial 2",
+  "version": "1.0.2",
+  "authors": {
+    "name": "Igor Voronin",
+    "url": "https://github.com/divStar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/divStar/ahmsville-dial2-hardware-sensors.git"
+  },
+  "logo": "./doxy-misc/ahmsville_dial2_logo.png",
+  "export": {
+    "exclude": [
+      ".idea",
+      ".pio",
+      "cmake-build-*",
+      "platformio.ini"
+    ]
+  },
+  "frameworks": "*",
+  "platforms": "*",
+  "dependencies": [
+    {
+      "name": "Dial2AbstractSensors",
+      "version": "file:///Users/igvo/CLionProjects/Dial2AbstractSensors/"
+    }
+  ],
+  "build": {
+    "libArchive": false
+  }
+}
