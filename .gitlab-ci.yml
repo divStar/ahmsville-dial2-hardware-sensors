@@ -1,28 +1,91 @@
 image: python:3.12-slim
 
+# Define rules for tags
+.rules_for_tags: &rules_for_tags
+  if: '$CI_COMMIT_TAG'
+  when: always
+
 # Define rules for merge requests
 .rules_for_merge_requests: &rules_for_merge_requests
   if: '$CI_MERGE_REQUEST_ID'
   when: always
 
+# Define cache folder to use
 cache:
   paths:
     - ~/.cache/pip
     - ~/.platformio/.cache
 
+# Define stages
 stages:
   - build
+  - publish
+  - gen-docs
+  - publish-docs
 
+# Add DNS and install PlatformIO in the builder container
 before_script:
   # TODO: create a separate docker runner with python
   - echo "nameserver 8.8.8.8" > /etc/resolv.conf
-  - pip install -U platformio --no-cache-dir -vvv
+  - pip install -U platformio --no-cache-dir
 
-test_build:
+# Build the library
+build_library:
   stage: build
   rules:
     - <<: *rules_for_merge_requests
+    - <<: *rules_for_tags
   variables:
     PLATFORMIO_CI_SRC: examples/CompileTest
   script:
     - pio ci --project-conf ./platformio.ini --environment zeroUSB --lib . --lib lib/mpu6050-custom
+
+# Publish the library to PlatformIO Registry
+publish_library:
+  stage: publish
+  rules:
+    - <<: *rules_for_tags
+  script:
+    - pio account login --username $PIO_USERNAME --password $PIO_PASSWORD
+    - pio pkg publish
+    - pio account logout
+
+generate_library_docs:
+  stage: gen-docs
+  rules:
+    - <<: *rules_for_merge_requests
+#    - <<: *rules_for_tags
+  services:
+    - name: docker:dind
+      alias: docker
+      entrypoint: [ "" ]
+      # update CA certificates, set private registry and DNS and then run the docker daemon
+      command: [ "/bin/sh","-c","update-ca-certificates && dockerd-entrypoint.sh --registry-mirror $CI_REGISTRY_MIRROR --dns 8.8.8.8" ]
+      variables:
+        DOCKER_DRIVER: overlay2
+  script:
+    - docker --version
+    - docker info
+    - |
+      docker run -it \
+      -v ./library.json:/app/library.json:ro \
+      -v ./src/:/app/src:ro \
+      -v ./include/:/app/include:ro \
+      -v ./public/:/app/public:rw \
+      docker-release.nexus.my.family/dial2-doxy-gen:latest
+  artifacts:
+    paths:
+      - ./public
+
+publish_library_docs:
+  stage: publish-docs
+  rules:
+    - <<: *rules_for_merge_requests
+#    - <<: *rules_for_tags
+  script:
+    # assuming the previous gen-docs stage completed successfully, ./public would contain an untracked folder e.g. 1.0.0
+    - git checkout -b gh-pages origin/gh-pages
+    # ./public is ignored by git by default (in my setup)
+    - git add ./public --force
+    - git commit -m "Generated $CI_COMMIT_TAG documentation"
+#    - git push
