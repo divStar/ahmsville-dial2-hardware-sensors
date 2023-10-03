@@ -25,7 +25,7 @@
   "dependencies": [
     {
       "name": "Dial2AbstractSensors",
-      "version": "file:///Users/igvo/CLionProjects/Dial2AbstractSensors/"
+      "version": "1.0.3"
     }
   ],
   "build": {
