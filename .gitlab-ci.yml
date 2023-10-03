@@ -77,7 +77,7 @@ generate_library_docs:
       -v ./src/:/app/src:ro \
       -v ./include/:/app/include:ro \
       -v ./public/:/app/public:rw \
-      docker-release.nexus.my.family/dial2-doxy-gen:latest
+      docker.nexus.my.family/dial2-doxy-gen:latest
   artifacts:
     paths:
       - ./public
