@@ -14,6 +14,7 @@ stages:
   - build
 
 before_script:
+  # TODO: create a separate docker runner with python
   - echo "nameserver 8.8.8.8" > /etc/resolv.conf
   - pip install -U platformio --no-cache-dir -vvv
 
