@@ -72,7 +72,7 @@ generate_library_docs:
     - docker info
   script:
     - |
-      docker run -it \
+      docker run -i \
       -v ./library.json:/app/library.json:ro \
       -v ./src/:/app/src:ro \
       -v ./include/:/app/include:ro \
