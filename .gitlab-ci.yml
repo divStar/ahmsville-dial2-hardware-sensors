@@ -1,4 +1,4 @@
-image: python:3.9
+image: python:3.12-slim
 
 # Define rules for merge requests
 .rules_for_merge_requests: &rules_for_merge_requests
@@ -14,7 +14,7 @@ stages:
   - build
 
 before_script:
-  - pip install -U platformio
+  - pip install -U platformio --no-cache-dir -vvv
 
 test_build:
   stage: build
