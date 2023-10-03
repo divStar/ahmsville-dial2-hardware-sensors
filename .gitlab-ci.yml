@@ -1,5 +1,3 @@
-image: python:3.12-slim
-
 # Define rules for tags
 .rules_for_tags: &rules_for_tags
   if: '$CI_COMMIT_TAG'
@@ -23,28 +21,30 @@ stages:
   - gen-docs
   - publish-docs
 
-# Add DNS and install PlatformIO in the builder container
-before_script:
-  # TODO: create a separate docker runner with python
-  - echo "nameserver 8.8.8.8" > /etc/resolv.conf
-  - pip install -U platformio --no-cache-dir
-
 # Build the library
 build_library:
+  image: python:3.12-slim
   stage: build
   rules:
     - <<: *rules_for_merge_requests
     - <<: *rules_for_tags
   variables:
     PLATFORMIO_CI_SRC: examples/CompileTest
+  before_script:
+    - echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    - pip install -U platformio --no-cache-dir
   script:
     - pio ci --project-conf ./platformio.ini --environment zeroUSB --lib . --lib lib/mpu6050-custom
 
 # Publish the library to PlatformIO Registry
 publish_library:
+  image: python:3.12-slim
   stage: publish
   rules:
     - <<: *rules_for_tags
+  before_script:
+    - echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    - pip install -U platformio --no-cache-dir
   script:
     - pio account login --username $PIO_USERNAME --password $PIO_PASSWORD
     - pio pkg publish
@@ -63,9 +63,10 @@ generate_library_docs:
       command: [ "/bin/sh","-c","update-ca-certificates && dockerd-entrypoint.sh --registry-mirror $CI_REGISTRY_MIRROR --dns 8.8.8.8" ]
       variables:
         DOCKER_DRIVER: overlay2
-  script:
+  before_script:
     - docker --version
     - docker info
+  script:
     - |
       docker run -it \
       -v ./library.json:/app/library.json:ro \
