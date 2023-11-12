@@ -2,7 +2,7 @@
   "name": "Dial2HardwareSensors",
   "keywords": "dial2, sensors, hardware, interfaces",
   "description": "A simple library containing hardware implementations of sensor adapters for the AhmsVille Dial 2",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": {
     "name": "Igor Voronin",
     "url": "https://github.com/divStar"
@@ -25,15 +25,18 @@
   "platforms": "atmelsam",
   "dependencies": [
     {
+      "owner": "voronii",
       "name": "Dial2AbstractSensors",
       "version": "1.0.3"
     },
     {
-      "name": "paulstoffregen/CapacitiveSensor",
+      "owner": "paulstoffregen",
+      "name": "CapacitiveSensor",
       "version": "^0.5.1"
     },
     {
-      "name": "denyssene/SimpleKalmanFilter",
+      "owner": "denyssene",
+      "name": "SimpleKalmanFilter",
       "version": "^0.1.0"
     }
   ],
