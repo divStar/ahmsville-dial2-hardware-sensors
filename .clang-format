@@ -1,3 +1,7 @@
+AllowShortFunctionsOnASingleLine: None
+BraceWrapping:
+  AfterFunction: false
+BreakBeforeBraces: Custom
 ColumnLimit: 140
 IncludeBlocks: Preserve
 IncludeCategories:
@@ -9,4 +13,5 @@ IncludeCategories:
     Priority: 3
   - Regex: '^".*"'
     Priority: 4
+ReflowComments: false
 SortIncludes: CaseSensitive

@@ -2,6 +2,7 @@
 #define MACROKEY_H
 
 #include <Callbacks.h>
+#include <IMacroKey.h>
 #include <USB/USBAPI.h>
 
 namespace HardwareSensors {
@@ -15,7 +16,7 @@ namespace HardwareSensors {
  * @author  Igor Voronin
  * @date    16.07.2023
  */
-class MacroKey {
+class HardwareMacroKey : public AbstractSensors::IMacroKey {
 public:
   /**
    * @brief Constructor.
@@ -23,21 +24,25 @@ public:
    * @param keyId           (int) the ID of the key
    * @param pin             (int) number of the pin of this macro-key
    * @param type            (char*) name of the task responsible for the macro keys
-   * @param changeHandler   (Callbacks::MacroKeyCallbackType) Change-handler, that is called after a change occurred and was processed
+   * @param changeHandler   (MacroKeyCallbackType) Change-handler, that is called after a change occurred and was processed
    */
-  explicit MacroKey(int keyId, int pin, const char *type, const Callbacks::MacroKeyCallbackType *changeHandler);
+  explicit HardwareMacroKey(int keyId, int pin, const char *type, const AbstractSensors::MacroKeyCallbackType &changeHandler);
+
+  void initialize() override {
+    // no initialization required for this sensor
+  }
 
   /**
    * @brief Returns the set pin.
    *
    * @return (int) number of the pin
    */
-  [[nodiscard]] int getPin() const;
+  [[nodiscard]] int getPin() const override;
 
   /**
    * @brief Function, which is called upon state change via interrupt.
    */
-  void onChange();
+  void onChange() override;
 
 private:
   /**
@@ -49,18 +54,22 @@ private:
    * @brief ID of the macro-key.
    */
   int keyId;
+
   /**
    * @brief Number of the pin of the macro-key.
    */
   int pin;
+
   /**
    * @brief Rise time (when the very first press has been registered).
    */
   volatile unsigned long riseTime;
+
   /**
    * @brief Fall time (when the very last press has been registered).
    */
   volatile unsigned long fallTime;
+
   /**
    * @brief Last time an interrupt occured.
    */
@@ -74,10 +83,10 @@ private:
   /**
    * @brief Change-handler, that is called after a change occurred and was processed.
    *
-   * @details This function is called with all the parameters described in Callbacks::MacroKeyCallbackType and is usually used for logging
-   * purposes.
+   * @details This function is called with all the parameters described in
+   * Callbacks::MacroKeyCallbackType and is usually used for logging purposes.
    */
-  const Callbacks::MacroKeyCallbackType *changeHandler;
+  const AbstractSensors::MacroKeyCallbackType &changeHandler;
 };
 
 } // namespace HardwareSensors
