@@ -1,4 +1,4 @@
-#include "HardwareMacroKey.h"
+#include "sensors/HardwareMacroKey.h"
 
 HardwareSensors::HardwareMacroKey::HardwareMacroKey(int keyId, int pin, const char *type,
                                                     const AbstractSensors::MacroKeyCallbackType &changeHandler)

@@ -9,17 +9,22 @@
  */
 
 #include <Arduino.h>
-#include <IAllSensors.h>
-#include "AllHardwareSensors.h"
-#include "DeviceVersion.h"
+#include "variants/AbsoluteVariantDevice.h"
+#include "variants/BaseVariantDevice.h"
+#include "variants/MacroKeysVariantDevice.h"
+#include "variants/SpaceNavVariantDevice.h"
 #include <memory>
 
-HardwareSensors::DeviceVersion deviceVersion;
-std::unique_ptr<HardwareSensors::AllHardwareSensors> allSensors;
+std::unique_ptr<HardwareSensors::BaseVariantDevice> baseVariantDevice;
+std::unique_ptr<HardwareSensors::MacroKeysVariantDevice> macroKeysVariantDevice;
+std::unique_ptr<HardwareSensors::SpaceNavVariantDevice> spaceNavVariantDevice;
+std::unique_ptr<HardwareSensors::AbsoluteVariantDevice> absoluteVariantDevice;
 
 void setup() {
-  deviceVersion = HardwareSensors::DeviceVersion::ABSOLUTE_VARIANT;
-  allSensors = std::make_unique<HardwareSensors::AllHardwareSensors>(nullptr);
+  baseVariantDevice = std::make_unique<HardwareSensors::BaseVariantDevice>();
+  macroKeysVariantDevice = std::make_unique<HardwareSensors::MacroKeysVariantDevice>(nullptr);
+  spaceNavVariantDevice = std::make_unique<HardwareSensors::SpaceNavVariantDevice>();
+  absoluteVariantDevice = std::make_unique<HardwareSensors::AbsoluteVariantDevice>(nullptr);
 }
 
 void loop() {

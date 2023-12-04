@@ -1,4 +1,4 @@
-#include "HardwareRotaryEncoder.h"
+#include "sensors/HardwareRotaryEncoder.h"
 
 namespace HardwareSensors {
 

@@ -1,10 +1,10 @@
 #ifndef DIALER_HARDWARESPACENAVIGATORSENSORADAPTER_H
 #define DIALER_HARDWARESPACENAVIGATORSENSORADAPTER_H
 
-#include <ISpaceNavigator.h>
-#include <MPU6050.h>
 #include <Wire.h>
-#include <helper_3dmath.h>
+#include "MPU6050.h"
+#include "helper_3dmath.h"
+#include "sensors/ISpaceNavigator.h"
 
 namespace HardwareSensors {
 

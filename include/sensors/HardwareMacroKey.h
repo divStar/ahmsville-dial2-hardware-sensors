@@ -1,9 +1,9 @@
 #ifndef MACROKEY_H
 #define MACROKEY_H
 
-#include <Callbacks.h>
-#include <IMacroKey.h>
 #include <USB/USBAPI.h>
+#include "MacroKeyCallbackType.h"
+#include "sensors/IMacroKey.h"
 
 namespace HardwareSensors {
 

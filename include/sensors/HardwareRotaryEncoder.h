@@ -1,9 +1,9 @@
 #ifndef ROTARYENCODER_H
 #define ROTARYENCODER_H
 
-#include <IRotaryEncoder.h>
-#include <SimpleKalmanFilter.h>
 #include <api/Common.h>
+#include "SimpleKalmanFilter.h"
+#include "sensors/IRotaryEncoder.h"
 #include <cmath>
 #include <memory>
 

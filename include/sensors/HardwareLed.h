@@ -2,7 +2,7 @@
 #define DIAL2HARDWARESENSORS_HARDWARELED_H
 
 #include "AvailableLeds.h"
-#include "ILed.h"
+#include "sensors/ILed.h"
 
 namespace HardwareSensors {
 

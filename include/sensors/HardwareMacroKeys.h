@@ -1,8 +1,10 @@
 #ifndef DIALER_HARDWAREMACROKEYS_H
 #define DIALER_HARDWAREMACROKEYS_H
 
-#include <IMacroKeys.h>
 #include "HardwareMacroKey.h"
+#include "sensors/HardwareLed.h"
+#include "sensors/HardwareLeds.h"
+#include "sensors/IMacroKeys.h"
 #include <memory>
 
 namespace HardwareSensors {
@@ -19,13 +21,19 @@ public:
   /**
    * @brief Constructor.
    *
-   * @param type    (const char*) name of the task responsible for the macro keys
+   * @param leds (const HardwareSensors::HardwareLeds) reference to the leds
+   * @param changeHandler (const AbstractSensors::MacroKeyCallbackType) reference to an onChange handler
    */
-  explicit HardwareMacroKeys(const AbstractSensors::MacroKeyCallbackType &changeHandler);
+  explicit HardwareMacroKeys(HardwareLeds &leds, const AbstractSensors::MacroKeyCallbackType &changeHandler);
 
   void initialize() override;
 
 private:
+  /**
+   * @brief Amount of macro keys on the macro keys module.
+   */
+  static const int COUNT_MACRO_KEYS = 5;
+
   /**
    * @brief Pin of the <strong>first</strong> MacroKey.
    */
@@ -56,10 +64,11 @@ private:
    */
   constexpr static const auto MACRO_KEY_TYPE = "macrokey";
 
+  HardwareLeds &leds;
   /**
    * @brief Array of macro-keys.
    */
-  static std::array<std::unique_ptr<HardwareMacroKey>, 5> keys; // NOLINT(bugprone-dynamic-static-initializers)
+  static std::array<std::unique_ptr<HardwareMacroKey>, 5> macroKeys; // NOLINT(bugprone-dynamic-static-initializers)
 
   /**
    * @brief Change-handler, that is called after a change occurred and was processed.

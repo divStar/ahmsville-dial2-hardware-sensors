@@ -11,14 +11,16 @@ namespace HardwareSensors {
  * to understand which LED is which.
  *
  * <p><em>Note:</em><ul>
- * <li>For <strong><code>BASE_LED#</code></strong> turn your device
+ * <li>For <strong><code>BASE_LED</code></strong> turn your device
  * <strong>upside down</strong> with the USB-C port at the top.
  * <code>BASE_LED1</code> is the LED next to the USB-C port on the left and the
- * numbering follows the indices counter-clockwise.</li> <li>For
- * <strong><code>MK_LED#</code></strong> let the macro-keys face you from left
+ * numbering follows the indices counter-clockwise.</li>
+ * <li>For <strong><code>MK_LED</code></strong> let the macro-keys face you from left
  * to right while the device is standing as intended. <code>MK_LED1</code> is
  * the LED under the left-most key and the numbering follows the indices from
  * left to right.</li>
+ * <li>The <strong><code>TOP_LED</code></strong> is the led under the
+ * capacitive "button".</li>
  * </ul></p>
  *
  * @author  Igor Voronin

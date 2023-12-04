@@ -1,4 +1,4 @@
-#include "HardwareSpaceNavigator.h"
+#include "sensors/HardwareSpaceNavigator.h"
 
 namespace HardwareSensors {
 

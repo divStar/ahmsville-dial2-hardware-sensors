@@ -1,8 +1,8 @@
 #ifndef DIALER_HARDWARECAPACITIVESENSORADAPTER_H
 #define DIALER_HARDWARECAPACITIVESENSORADAPTER_H
 
-#include <ICapacitive.h>
 #include "CapacitiveSensor.h"
+#include "sensors/ICapacitive.h"
 #include <memory>
 
 namespace HardwareSensors {

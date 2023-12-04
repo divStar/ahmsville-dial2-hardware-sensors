@@ -1,4 +1,4 @@
-#include "HardwareHaptic.h"
+#include "sensors/HardwareHaptic.h"
 
 namespace HardwareSensors {
 

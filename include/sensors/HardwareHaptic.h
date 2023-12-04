@@ -1,8 +1,8 @@
 #ifndef DIALER_HARDWAREHAPTICSENSORADAPTER_H
 #define DIALER_HARDWAREHAPTICSENSORADAPTER_H
 
-#include <IHaptic.h>
 #include <api/Common.h>
+#include "sensors/IHaptic.h"
 
 namespace HardwareSensors {
 

@@ -1,4 +1,4 @@
-#include "HardwareCapacitive.h"
+#include "sensors/HardwareCapacitive.h"
 
 namespace HardwareSensors {
 

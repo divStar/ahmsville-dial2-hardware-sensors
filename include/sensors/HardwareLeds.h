@@ -1,8 +1,8 @@
 #ifndef DIAL2HARDWARESENSORS_HARDWARELEDS_H
 #define DIAL2HARDWARESENSORS_HARDWARELEDS_H
 
-#include <ILeds.h>
 #include "HardwareLed.h"
+#include "sensors/ILeds.h"
 #include <memory>
 
 namespace HardwareSensors {
